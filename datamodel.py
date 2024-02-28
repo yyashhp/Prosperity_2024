@@ -60,7 +60,8 @@ class OrderDepth:
     def __init__(self):
         self.buy_orders: Dict[int, int] = {}
         self.sell_orders: Dict[int, int] = {}
-
+#price, quantity
+#quantity negative for shorts
 
 class Trade:
 
