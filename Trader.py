@@ -17,7 +17,13 @@ class Trader:
             orders: List[Order] = []
             # Define a fair value for the PRODUCT. Might be different for each tradable item
             # Note that this value of 10 is just a dummy value, you should likely change it!
-            acceptable_price = 10  # Participant should calculate this value
+            if product == 'AMETHYSTS':
+                acceptable_price = 10000
+            elif product == 'STARFRUIT':
+                acceptable_price = 4985.5
+            else:
+                acceptable_price = 10
+            print(product, acceptable_price)  # Participant should calculate this value
             # All print statements output will be delivered inside test results
 
             print("Acceptable price : " + str(acceptable_price))
