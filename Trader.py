@@ -73,6 +73,7 @@ class Trader:
           #  print(state.own_trades)
             # Order depth list come already sorted. 
 						# We can simply pick first item to check first item to get best bid or offer
+<<<<<<< HEAD
             if len(order_depth.sell_orders) != 0 and product == 'AMETHYSTS' and state.timestamp > 0:
               #for offer in list(order_depth.sell_orders.items()):
                # best_ask, best_ask_amount = offer[0], offer[1]
@@ -103,6 +104,26 @@ class Trader:
             elif product == 'AMETHYSTS' and state.timestamp > 0:
               prev_data[1].append((best_ask + best_bid)/2)
               
+=======
+            if len(order_depth.sell_orders) != 0:
+                best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
+                if int(best_ask) < acceptable_price:
+                    # In case the lowest ask is lower than our fair value,
+                    # This presents an opportunity for us to buy cheaply
+                    # The code below therefore sends a BUY order at the price level of the ask,
+                    # with the same quantity
+                    # We expect this order to trade with the sell order
+                    print("BUY", str(best_ask_amount) + "x", best_ask)
+                    orders.append(Order(product, best_ask, -best_ask_amount))
+    
+            if len(order_depth.buy_orders) != 0:
+                best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
+                if int(best_bid) > acceptable_price:
+                    # Similar situation with sell orders
+                    print("SELL", str(best_bid_amount) + "x", best_bid)
+                    orders.append(Order(product, best_bid, -best_bid_amount))
+            
+>>>>>>> d9454d2 (load)
             result[product] = orders
     
 		    # String value holding Trader state data required. 
