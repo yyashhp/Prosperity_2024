@@ -1,3 +1,5 @@
+# NECESSARY IMPORTS
+
 from datamodel import OrderDepth, UserId, TradingState, Order
 from typing import List
 import string
@@ -6,15 +8,20 @@ import numpy as np
 import pandas as pd
 
 
+# HELPER FUNCTIONS
+
 def ewma(vals, window, prod):
   df = pd.DataFrame(vals[(len(vals)-window):])
   if prod == 'S':
-    alph = 0.45
+    alph = 0.45 # originally 0.45
   else:
     alph = 0.3
   avg = df.ewm(alpha = alph, adjust = True).mean()
   return avg.iloc[-1].values[0]
                     
+
+# START OF TRADER CLASS
+
 class Trader:
     
   def run(self, state: TradingState):
